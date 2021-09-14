@@ -16,7 +16,6 @@ def index(request):
 # 		raise Http404('Question does not exist')
 # 	return render(request=request, template_name='polls/detail.html', context={'question': question})
 
-
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request=request, template_name='polls/detail.html', context={'question': question})
@@ -30,13 +29,11 @@ def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
+        selected_choice.votes += 1
+        selected_choice.save()
+        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
     except (KeyError, Choice.DoesNotExist):
         return render(request=request, template_name='polls/detail.html', context={
             'question': question,
             'error_message': "You didn't select a choice",
         })
-	else:
-		print("hello")
-	selected_choice.votes += 1
-	selected_choice.save()
-	return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))

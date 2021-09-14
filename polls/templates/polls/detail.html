@@ -1,12 +1,30 @@
-<form action={% url 'polls:vote' question.id %} method="post">
-{% csrf_token %}
-<fieldset>
-	<legend><h1>{{  question.question_text }}</h1></legend>
-	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-	{% for choice in question.choice_set.all %}
-		<input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-		<label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
-	{% endfor %}
-</fieldset>
-<input type="submit" value="Vote">
-</form>
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+<div class="container">
+	<div class="mt-5">
+		<div class="row">
+			<div class="col-md-6">
+				<form action={% url 'polls:vote' question.id %} method="post">
+					{% csrf_token %}
+					<fieldset>
+						<legend>
+							<h1>{{  question.question_text }}</h1>
+						</legend>
+						<div class="py-2">
+							{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+							{% for choice in question.choice_set.all %}
+							<input class="form-check-input px-2" type="radio" name="choice"
+								id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+							<label class="form-check-label px-2"
+								for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+							{% endfor %}
+						</div>
+					</fieldset>
+					<input class="btn btn-primary mt-2" type="submit" value="Vote">
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
