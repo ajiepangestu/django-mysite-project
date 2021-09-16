@@ -82,7 +82,13 @@ DATABASES = {
         'NAME': 'dev_django_mysite',
         'HOST': 'localhost',
         'USER': 'dev',
-        'PASSWORD': 'password'
+        'PASSWORD': 'password',
+        'TEST': {
+            'NAME': 'dev_django_mysite_test',
+            'HOST': 'localhost',
+            'USER': 'dev',
+            'PASSWORD': 'password',
+        }
     }
 }
 
