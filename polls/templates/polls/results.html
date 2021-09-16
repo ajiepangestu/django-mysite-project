@@ -2,7 +2,7 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
-{% load polls_extras %}
+{% comment %} {% load polls_extras %} {% endcomment %}
 {% comment %} {%  debug_object_dump question %} {% endcomment %}
 <div class="container">
 	<div class="row mt-5">
@@ -10,7 +10,7 @@
 			<h1>{{ question.question_text }}</h1>
 			<ul>
 				{% for choice in question.choice_set.all %}
-				<li>{{ choice }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+				<li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
 				{% endfor %}
 			</ul>
 			<a class="btn btn-primary" href="{% url 'polls:detail' question.id %}">Vote Again</a>
