@@ -16,13 +16,15 @@ def index(request):
 # 		raise Http404('Question does not exist')
 # 	return render(request=request, template_name='polls/detail.html', context={'question': question})
 
+
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request=request, template_name='polls/detail.html', context={'question': question})
 
 
 def results(request, question_id):
-    return HttpResponse(f"You're looking at the results of question {question_id}")
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request=request, template_name='polls/results.html', context={'question': question})
 
 
 def vote(request, question_id):
