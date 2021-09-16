@@ -1,8 +1,10 @@
-from .models import Question
 import datetime
+
 from django.test import TestCase
 from django.utils import timezone
 from django.urls import reverse
+
+from .models import Question
 
 
 class QuestionModelTest(TestCase):
@@ -37,6 +39,7 @@ def create_question(question_text, days):
 
 
 class QuestionIndexViewTest(TestCase):
+
     def test_no_questions(self):
         response = self.client.get(reverse('polls:index'))
         self.assertEqual(response.status_code, 200)
